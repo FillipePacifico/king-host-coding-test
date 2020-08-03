@@ -2,8 +2,8 @@
 
 namespace App\Src;
 
-final Class Dominio {
-
+final Class Dominio 
+{
     public $dominio;
 
     public $dominiosRegistrados;
@@ -11,7 +11,8 @@ final Class Dominio {
     public function __construct($dominio)
     {
         $this->dominio = $dominio;
-        $this->dominiosRegistrados = array (
+        $this->dominiosRegistrados = array 
+        (
             'kinghost.com.br',
             'kinghost.com',
             'gmail.com',
@@ -23,20 +24,24 @@ final Class Dominio {
     }
 
     /** Valida se a string foi passada vazia */
-    public function validaDominioVazio() {
+    public function validaDominioVazio() 
+    {
         return empty($this->dominio);
     }
 
     /** Retire espaços em branco da string */
-    public function retiraEspacos() {
+    public function retiraEspacos() 
+    {
         $formater = str_replace(' ', '',$this->dominio);
         return $formater; 
         
     }
 
     /** Valida quantidade minima de 2 caracteres */
-    public function minimoCaracteres() {
-        if (strlen($this->dominio) < 2) {
+    public function minimoCaracteres() 
+    {
+        if (strlen($this->dominio) < 2) 
+        {
             return false;
         }
 
@@ -44,8 +49,10 @@ final Class Dominio {
     }
 
     /** Valida quantidade maxima de 26 caracteres */
-    public function maximoCaracteres() {
-        if (strlen($this->dominio) > 26) {
+    public function maximoCaracteres() 
+    {
+        if (strlen($this->dominio) > 26)
+        {
             return false;
         }
 
@@ -53,13 +60,16 @@ final Class Dominio {
     }
 
     /** Não pode conter somente números  */
-    public function somenteNumeros() {
+    public function somenteNumeros() 
+    {
         return is_numeric($this->dominio);
     }
 
     /** Não pode ser um domínio já registrado */
-    public function verificarDominioRegistrado() {
-        if (in_array($this->dominio, $this->dominiosRegistrados)) {
+    public function verificarDominioRegistrado() 
+    {
+        if (in_array($this->dominio, $this->dominiosRegistrados)) 
+        {
             return false;
         }
 

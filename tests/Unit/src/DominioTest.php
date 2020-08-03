@@ -5,25 +5,16 @@ namespace Tests\Unit\Src;
 use PHPUnit\Framework\TestCase;
 use App\Src\Dominio;
 
-// TODO: colocar para funcionar tanto em LINUX quanto WINDOWS
-// include '..\..\..\src\Dominio.php';
-include join(DIRECTORY_SEPARATOR, ['C:', 'wamp64', 'www', 'king-host-test', 'src', 'Dominio.php']);
-// TODO: procurar como implementar autoload no projeto
-
 class DominioTest extends TestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
+   
     public function testValidaDominioVazioSuccess()
     {
         $dominio = new Dominio('google.com.br');
         $response = $dominio->validaDominioVazio();
 
         static::assertFalse($response);
-     }
+    }
 
 	public function testValidaDominioVazioFails()
     {
@@ -39,5 +30,77 @@ class DominioTest extends TestCase
         $response = $dominio->retiraEspacos();
 
         static::assertEquals($response, 'google.com.br');
+    }
+
+     public function testValidaRetiraEspacosFails()
+    {
+        $dominio = new Dominio('google. com. br');
+        $response = $dominio->retiraEspacos();
+
+        static::assertEquals($response, 'google. com. br');
+    }
+
+   public function testMinimoCaracteresSuccess()
+    {
+        $dominio = new Dominio('google.com.br');
+        $response = $dominio->minimoCaracteres();
+
+        static::assertStringMatchesFormat($response);
+    }
+
+    public function testMinimoCaracteresFails()
+    {
+        $dominio = new Dominio('g');
+        $response = $dominio->minimoCaracteres();
+
+        static::assertStringMatchesFormat($response);
+    }
+
+    public function testMaximoCaracteresSuccess()
+    {
+        $dominio = new Dominio('google.com.br');
+        $response = $dominio->maximoCaracteres();
+
+        static::assertStringMatchesFormat($response);
+    }
+
+    public function testMaximoCaracteresFails()
+    {
+        $dominio = new Dominio('googleonovostestesqa.com.br');
+        $response = $dominio->maximoCaracteres();
+
+        static::assertStringMatchesFormat($response);
+    }
+
+    public function testSomenteNumerosSuccess()
+    {
+        $dominio = new Dominio('g1ogle.com.br');
+        $response = $dominio->somenteNumeros();
+
+        static::assertFalse($response);
+    }
+
+    public function testSomenteNumerosFails()
+    {
+        $dominio = new Dominio('123456789');
+        $response = $dominio->somenteNumeros();
+
+        static::assertTrue($response);
+    }
+
+      public function testVerificarDominioRegistradoSuccess()
+    {
+        $dominio = new Dominio('novosite.com.br');
+        $response = $dominio->verificarDominioRegistrado();
+
+        static::assertFalse($response);
+    }
+
+    public function testVerificarDominioRegistradoFails()
+    {
+        $dominio = new Dominio('google.com.br');
+        $response = $dominio->verificarDominioRegistrado();
+
+        static::assertTrue($response);
     }
 }

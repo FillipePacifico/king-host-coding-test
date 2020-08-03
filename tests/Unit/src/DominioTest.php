@@ -5,6 +5,8 @@ namespace Tests\Unit\Src;
 use PHPUnit\Framework\TestCase;
 use App\Src\Dominio;
 
+require __DIR__ . "\..\..\..\src\Dominio.php";
+
 class DominioTest extends TestCase
 {
    
@@ -45,15 +47,15 @@ class DominioTest extends TestCase
         $dominio = new Dominio('google.com.br');
         $response = $dominio->minimoCaracteres();
 
-        static::assertStringMatchesFormat($response);
+        static::assertStringMatchesFormat($response, 'google.com.br');
     }
 
     public function testMinimoCaracteresFails()
     {
-        $dominio = new Dominio('g');
+        $dominio = new Dominio('google.com.br');
         $response = $dominio->minimoCaracteres();
 
-        static::assertStringMatchesFormat($response);
+        static::assertStringMatchesFormat($response, 'g');
     }
 
     public function testMaximoCaracteresSuccess()
@@ -61,15 +63,15 @@ class DominioTest extends TestCase
         $dominio = new Dominio('google.com.br');
         $response = $dominio->maximoCaracteres();
 
-        static::assertStringMatchesFormat($response);
+        static::assertStringMatchesFormat($response, 'google.com.br');
     }
 
     public function testMaximoCaracteresFails()
     {
-        $dominio = new Dominio('googleonovostestesqa.com.br');
+        $dominio = new Dominio('google.com.br');
         $response = $dominio->maximoCaracteres();
 
-        static::assertStringMatchesFormat($response);
+        static::assertStringMatchesFormat($response, 'googleonovostestesqa.com.br');
     }
 
     public function testSomenteNumerosSuccess()
@@ -93,7 +95,7 @@ class DominioTest extends TestCase
         $dominio = new Dominio('novosite.com.br');
         $response = $dominio->verificarDominioRegistrado();
 
-        static::assertFalse($response);
+        static::assertTrue($response);
     }
 
     public function testVerificarDominioRegistradoFails()
@@ -101,6 +103,6 @@ class DominioTest extends TestCase
         $dominio = new Dominio('google.com.br');
         $response = $dominio->verificarDominioRegistrado();
 
-        static::assertTrue($response);
+        static::assertFalse($response);
     }
 }

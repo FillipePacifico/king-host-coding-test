@@ -1,15 +1,39 @@
 # King Host Test
 
 ## **Descrição do Projeto**
-<p align="justify"> Testes para a classe Dominio </p>
+Testes para a classe Dominio
 
 ## **O que foi Implementado**
-Implementamos testes unitários para os metodos da Classe Dominio, onde inserimos dois cenarios de testes para cada metodo um para quando o comportamento seguia com sucesso a regra implementada na validação que cada metodo faz outro quando o comportamento do parametro inserido era diferente da regra do metodo
+Foi implementado testes unitários para os métodos da Classe Dominio, onde foi inserido
+dois cenários de testes para cada método (Success e Fails).
 
-## Linguagens e libs utilizadas
-- Php
-- Libs do PhpUnit para fazer os testes unitarios
+## Ambiente para teste
+- Apache ^2.4
+- PHP ^7.1
+- phpunit/phpunit": "^7.0",
 
 ## Como Testar
-<p align="justify">Acessar o projeto na pasta C:\wamp64\www\king-host-test e rodar os teste:</p>
+Acesse o repositório no Github:
+https://github.com/FillipePacifico/king-host-coding-test
+
+Faça o clone do projeto na sua máquina local, rodando o comando abaixo:
+
+Https
+```shell
+$ git clone https://github.com/FillipePacifico/king-host-coding-test.git
+```
+
+SSH
+```shell
+$ git clone git@github.com:FillipePacifico/king-host-coding-test.git
+```
+
+Acesse a pasta do projeto que acabou de fazer o clone do github e instale as dependências:
+```shell
+$ composer install
+```
+
+Para realizar os testes execute o comando abaixo:
+```shell
 $ vendor\bin\phpunit
+```

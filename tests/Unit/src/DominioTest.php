@@ -5,11 +5,9 @@ namespace Tests\Unit\Src;
 use PHPUnit\Framework\TestCase;
 use App\Src\Dominio;
 
-require __DIR__ . "\..\..\..\src\Dominio.php";
-
 class DominioTest extends TestCase
 {
-   
+
     public function testValidaDominioVazioSuccess()
     {
         $dominio = new Dominio('google.com.br');
@@ -31,7 +29,7 @@ class DominioTest extends TestCase
         $dominio = new Dominio('google. com. br');
         $response = $dominio->retiraEspacos();
 
-        static::assertEquals($response, 'google.com.br');
+        static::assertEquals('google.com.br', $response);
     }
 
      public function testValidaRetiraEspacosFails()
@@ -39,23 +37,23 @@ class DominioTest extends TestCase
         $dominio = new Dominio('google. com. br');
         $response = $dominio->retiraEspacos();
 
-        static::assertEquals($response, 'google. com. br');
+        static::assertNotEquals('google. com. br', $response);
     }
 
    public function testMinimoCaracteresSuccess()
-    {
+   {
         $dominio = new Dominio('google.com.br');
         $response = $dominio->minimoCaracteres();
 
-        static::assertStringMatchesFormat($response, 'google.com.br');
+        static::assertTrue($response);
     }
 
     public function testMinimoCaracteresFails()
     {
-        $dominio = new Dominio('google.com.br');
+        $dominio = new Dominio('g');
         $response = $dominio->minimoCaracteres();
 
-        static::assertStringMatchesFormat($response, 'g');
+        static::assertFalse($response);
     }
 
     public function testMaximoCaracteresSuccess()
@@ -63,20 +61,20 @@ class DominioTest extends TestCase
         $dominio = new Dominio('google.com.br');
         $response = $dominio->maximoCaracteres();
 
-        static::assertStringMatchesFormat($response, 'google.com.br');
+        static::assertTrue($response);
     }
 
     public function testMaximoCaracteresFails()
     {
-        $dominio = new Dominio('google.com.br');
+        $dominio = new Dominio('agendamento.online.google.com.br');
         $response = $dominio->maximoCaracteres();
 
-        static::assertStringMatchesFormat($response, 'googleonovostestesqa.com.br');
+        static::assertFalse($response);
     }
 
     public function testSomenteNumerosSuccess()
     {
-        $dominio = new Dominio('g1ogle.com.br');
+        $dominio = new Dominio('google123.com.br');
         $response = $dominio->somenteNumeros();
 
         static::assertFalse($response);

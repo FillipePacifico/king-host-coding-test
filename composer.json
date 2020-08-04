@@ -1,5 +1,6 @@
 {
-    "name": "phpunit/phpunit",
+    "name": "setup-php",
+    "version": "2.4.1",
     "type": "project",
     "description": "Kinghost",
     "keywords": [

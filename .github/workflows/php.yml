@@ -38,10 +38,6 @@ jobs:
         php-version: ${{ matrix.php-versions }}
         ini-values: post_max_size=256M, short_open_tag=On
         tools: phpunit
-  
-   test:
-    runs-on: self-hosted
-    needs: [build]
-    
-    steps:
-    - uses: php-actions/phpunit@v1
+      
+    - name: Run test suite
+      run: composer run-script test  
